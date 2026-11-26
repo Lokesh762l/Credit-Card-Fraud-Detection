@@ -109,8 +109,6 @@ def main():
             for (i, j), val in np.ndenumerate(cm): ax.text(j, i, str(val), ha="center", va="center")
             fig.tight_layout(); fig.savefig(PLOTS / f"cm_{condition}_{name.lower().replace(' ', '_')}.png", dpi=130); plt.close(fig)
     (MODELS / "model_results.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    from shap_explainer import build_global_explanation
-    build_global_explanation(best[3], X_train, X_test)
     print(f"Best model by PR-AUC: {best[2]} ({best[1]}), PR-AUC={best[0][0]:.4f}")
 
 

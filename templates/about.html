@@ -1,1 +1,13 @@
-{% extends 'base.html' %}{% block title %}About{% endblock %}{% block content %}<div class="page-heading"><div class="eyebrow">PROJECT NOTES</div><h1>About this study</h1><p>Credit Card Fraud Detection System with SHAP Explainability and Fraud Analytics Dashboard.</p></div><div class="panel prose"><h2>Objective</h2><p>Compare five machine learning classifiers for identifying potentially fraudulent transactions, assess class imbalance, and explain model predictions.</p><h2>Dataset</h2><p>The Kaggle European cardholder dataset contains Time, 28 anonymized PCA features (V1–V28), Amount, and Class. Class 0 is genuine and Class 1 is fraud. The PCA features are not merchant, location, or card identity fields.</p><h2>Algorithms</h2><p>Logistic Regression, Decision Tree, Random Forest, Bagging Classifier, and AdaBoost are each trained on original and SMOTE-resampled training data.</p><h2>Class imbalance</h2><p>Fraud represents a small share of transactions. Accuracy can be misleading; precision, recall, F1, and PR-AUC are important measures. SMOTE is applied only within the training pipeline.</p><h2>SHAP</h2><p>Permutation SHAP explains model output as contributions in fraud probability space (Class 1). It describes model behavior and does not identify the actual cause of fraud.</p><h2>Technology</h2><p>Python, pandas, NumPy, scikit-learn, imbalanced-learn, SHAP, Matplotlib, Flask, Jinja2, Bootstrap 5, Chart.js, and Joblib.</p></div>{% endblock %}
+{% extends 'base.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+<div class="page-heading"><div class="eyebrow">PROJECT NOTES</div><h1>About this study</h1><p>Credit Card Fraud Detection System and Fraud Analytics Dashboard.</p></div>
+<div class="panel prose">
+  <h2>Objective</h2><p>Compare five machine-learning classifiers for identifying potentially fraudulent transactions and assess how class imbalance affects their performance.</p>
+  <h2>Dataset</h2><p>The Kaggle European cardholder dataset contains Time, 28 anonymized PCA features (V1–V28), Amount, and Class. Class 0 is genuine and Class 1 is fraud. The PCA features are not merchant, location, or card identity fields.</p>
+  <h2>Algorithms</h2><p>Logistic Regression, Decision Tree, Random Forest, Bagging, and AdaBoost are each trained on original and SMOTE-resampled training data.</p>
+  <h2>Class imbalance</h2><p>Fraud represents a small share of transactions. Accuracy can be misleading; precision, recall, F1, PR-AUC, and confusion matrices are useful measures. SMOTE is applied only within the training pipeline.</p>
+  <h2>Evaluation</h2><p>Models are trained on a stratified 80% training split and evaluated on the same untouched 20% test split. ROC and precision-recall curves are generated from test-set predictions.</p>
+  <h2>Technology</h2><p>Python, pandas, NumPy, scikit-learn, imbalanced-learn, Matplotlib, Flask, Jinja2, Bootstrap 5, Chart.js, and Joblib.</p>
+</div>
+{% endblock %}

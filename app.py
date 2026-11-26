@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 from flask import Flask, flash, jsonify, redirect, render_template, request, send_file, send_from_directory, url_for
 from src.data_preprocessing import FEATURES, load_dataset
-from src.shap_explainer import explain_local
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "dataset" / "creditcard.csv"
@@ -45,11 +44,7 @@ def predict_one(row):
     if model is None: raise RuntimeError("Models are not trained yet. Add the dataset and run python src/train_models.py.")
     probability = float(model.predict_proba(row[FEATURES])[:, 1][0])
     prediction = int(probability >= 0.5)
-    explanation = None
-    if DATA.exists():
-        data = load_dataset(DATA)[FEATURES]
-        explanation = explain_local(model, row[FEATURES], data.sample(n=min(20, len(data)), random_state=42))
-    return {"prediction": prediction, "label": "Fraudulent" if prediction else "Genuine", "probability": probability, "explanation": explanation}
+    return {"prediction": prediction, "label": "Fraudulent" if prediction else "Genuine", "probability": probability}
 
 @app.route("/detect", methods=["GET", "POST"])
 def detect():
@@ -100,9 +95,7 @@ def batch_download():
 @app.route("/dashboard")
 def dashboard():
     results = load_results()
-    path = ROOT / "artifacts/shap/global_importance.csv"
-    importance = pd.read_csv(path).head(10).to_dict("records") if path.exists() else []
-    return render_template("dashboard.html", stats=stats(), results=results, importance=importance)
+    return render_template("dashboard.html", stats=stats(), results=results)
 
 @app.route("/comparison")
 def comparison(): return render_template("comparison.html", results=load_results())
