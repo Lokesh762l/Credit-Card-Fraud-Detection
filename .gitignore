@@ -1,0 +1,11 @@
+venv/
+.venv/
+__pycache__/
+.mplconfig/
+*.py[cod]
+models/*.joblib
+models/model_results.json
+artifacts/plots/*.png
+artifacts/shap/*
+artifacts/metrics/*
+dataset/creditcard.csv
